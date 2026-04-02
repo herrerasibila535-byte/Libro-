@@ -1,0 +1,82 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Courier New', Courier, monospace; /* O una fuente pixel descargada */
+    color: white;
+}
+
+.background-container {
+    background: linear-gradient(to bottom, #4a90e2, #d66d75); /* Simula el cielo de la captura */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px #000;
+    margin-bottom: 40px;
+}
+
+.contenedor-sobres {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 30px;
+    width: 80%;
+    max-width: 900px;
+}
+
+.sobre {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.sobre:hover {
+    transform: scale(1.1);
+}
+
+.sobre-imagen {
+    width: 100px;
+    image-rendering: pixelated; /* Mantiene el estilo pixel art nítido */
+}
+
+.sobre-titulo {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-shadow: 1px 1px #000;
+}
+
+/* Estilos básicos del Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-contenido {
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 15% auto;
+    padding: 20px;
+    border: 4px solid #000;
+    width: 300px;
+    text-align: center;
+    position: relative;
+}
+
+.cerrar {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
