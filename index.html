@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Erick</title>
+    <style>
+        :root {
+            --bg-dark: #1a1a1a;
+            --accent-red: #4a0404;
+            --text-color: #d4af37; /* Oro viejo */
+            --window-bg: #262626;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle, #2a2a2a 1px, transparent 1px);
+            background-size: 30px 30px;
+            color: var(--text-color);
+            font-family: 'Garamond', serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Área del escritorio */
+        #desktop {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 110px);
+            grid-template-rows: repeat(auto-fill, 110px);
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .folder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .folder:hover { transform: scale(1.05); }
+
+        .folder-icon {
+            width: 60px;
+            height: 45px;
+            background: var(--accent-red);
+            border: 2px solid var(--text-color);
+            position: relative;
+            border-radius: 0 5px 5px 5px;
+        }
+
+        .folder-icon::before {
+            content: '';
+            position: absolute;
+            top: -12px; left: -2px;
+            width: 25px; height: 12px;
+            background: var(--accent-red);
+            border: 2px solid var(--text-color);
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .folder-label {
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Ventanas */
+        .window {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 400px;
+            background: var(--window-bg);
+            border: 2px solid var(--text-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .window.open { transform: translate(-50%, -50%) scale(1); }
+
+        .window-header {
+            background: var(--text-color);
+            color: black;
+            padding: 5px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .close-btn { cursor: pointer; font-size: 18px; }
+
+        .window-content {
+            padding: 25px;
+            max-height: 300px;
+            overflow-y: auto;
+            line-height: 1.6;
+            font-size: 17px;
+            color: #e0e0e0;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+
+<div id="desktop">
+    <div class="folder" onclick="openWindow('Nuestra Historia', 'Aquí puedes escribir cómo se conocieron o ese momento que cambió todo entre ustedes...')">
+        <div class="folder-icon"></div>
+        <div class="folder-label">Historia.txt</div>
+    </div>
+
+    <div class="folder" onclick="openWindow('Para Erick', 'Eres una persona con un espíritu indomable. Admiro tu lealtad y tu esfuerzo constante...')">
+        <div class="folder-icon"></div>
+        <div class="folder-label">Notas_Amor.doc</div>
+    </div>
+
+    <div class="folder" onclick="openWindow('Planes Futuros', 'El futuro nos espera. No importa la distancia, cada paso que damos nos acerca más...')">
+        <div class="folder-icon"></div>
+        <div class="folder-label">Destino.exe</div>
+    </div>
+</div>
+
+<div id="overlay" onclick="closeWindow()"></div>
+
+<div id="window" class="window">
+    <div class="window-header">
+        <span id="window-title">Documento</span>
+        <span class="close-btn" onclick="closeWindow()">×</span>
+    </div>
+    <div class="window-content" id="window-content"></div>
+</div>
+
+<script>
+    function openWindow(title, text) {
+        document.getElementById('window-title').innerText = title;
+        document.getElementById('window-content').innerText = text;
+        document.getElementById('window').classList.add('open');
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    function closeWindow() {
+        document.getElementById('window').classList.remove('open');
+        document.getElementById('overlay').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
